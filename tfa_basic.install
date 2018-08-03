@@ -295,4 +295,7 @@ function tfa_basic_uninstall() {
   variable_del('tfa_basic_twilio_account_sid');
   variable_del('tfa_basic_twilio_account_token');
   variable_del('tfa_basic_sms_nanp_validate');
+  variable_del('tfa_basic_email_error_message');
+  variable_del('tfa_basic_email_subject_text');
+  variable_del('tfa_basic_email_message_text');
 }

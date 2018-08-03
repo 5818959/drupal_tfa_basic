@@ -116,7 +116,15 @@ function tfa_basic_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'tfa_basic.pages.inc',
   );
-
+  $items['user/%user/security/tfa/email-setup'] = array(
+    'title' => 'TFA setup',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tfa_basic_setup_form', 1, 'tfa_basic_email'),
+    'access callback' => 'tfa_basic_setup_access',
+    'access arguments' => array(1, 'setup own tfa'),
+    'type' => MENU_CALLBACK,
+    'file' => 'tfa_basic.pages.inc',
+  );
   return $items;
 }
 
@@ -176,6 +184,10 @@ function tfa_basic_tfa_api() {
       'class' => 'TfaBasicSms',
       'name' => 'Twilio SMS',
     ),
+    'tfa_basic_email' => array(
+      'class' => 'TfaBasicEmail',
+      'name' => 'Email',
+    ),
     'tfa_basic_help' => array(
       'class' => 'TfaBasicHelp',
       'name' => 'Help page',
@@ -224,6 +236,17 @@ function tfa_basic_sms_create($context) {
   $number = tfa_basic_get_mobile_number($account);
   $client = tfa_basic_get_twilio_client();
   return new TfaBasicSms($context, $number, $client);
+}
+
+/**
+ * Create TfaBasicEmail plugin.
+ *
+ * @param array $context
+ * @return TfaBasicEmail
+ */
+function tfa_basic_email_create($context) {
+  $account = user_load($context['uid']);
+  return new TfaBasicEmail($context, $account);
 }
 
 /**
@@ -641,6 +664,32 @@ function tfa_basic_form_tfa_admin_settings_alter(&$form, &$form_state, $form_id)
     $form['tfa_fallback']['tfa_basic_sms']['enable']['#description'] = t('Not available for use because Twilio PHP library is not installed. See TFA Basic README.txt.');
   }
 
+  $email_states = array(
+    'visible' => array(
+      array(
+        array(':input[name="tfa_fallback[tfa_basic_email][enable]"]' => array('checked' => TRUE)),
+        'or',
+        array(':input[name="tfa_validate"]' => array('value' => 'tfa_basic_email'))
+      )
+    )
+  );
+  $form['tfa_basic_email_subject_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email subject text'),
+    '#default_value' => variable_get('tfa_basic_email_subject_text', '@site_name verification code'),
+    '#description' => t('The email subject sent to user.'),
+    '#weight' => 1,
+    '#states' => $email_states
+  );
+  $form['tfa_basic_email_message_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email message text'),
+    '#default_value' => variable_get('tfa_basic_email_message_text', 'Verification code: @code'),
+    '#description' => t('The email message sent to user.'),
+    '#weight' => 1,
+    '#states' => $email_states
+  );
+
   $form['tfa_fallback']['tfa_basic_help']['weight']['#default_value'] = 10;
   $form['tfa_fallback']['tfa_basic_help']['weight']['#disabled'] = TRUE;
   $default_help = t('Contact support to reset your access');
@@ -702,6 +751,14 @@ function tfa_basic_form_validate($form, &$form_state) {
       form_set_error('', t('An account field for mobile number storage is required to use the Twilio SMS plugin. Consult TFA Basic README.txt for more info.'));
     }
   }
+  if (!empty($values['tfa_fallback']) && (!empty($values['tfa_fallback']['tfa_basic_email']['enable']) || $values['tfa_validate'] === 'tfa_basic_email')) {
+    if (empty($form_state['values']['tfa_basic_email_subject_text'])) {
+      form_set_error('tfa_basic_email_subject_text', t('Email subject required if Email plugin is enabled.'));
+    }
+    if (empty($form_state['values']['tfa_basic_email_message_text'])) {
+      form_set_error('tfa_basic_email_message_text', t('Email message required if Email plugin is enabled.'));
+    }
+  }
 }
 
 /**
@@ -725,6 +782,12 @@ function tfa_basic_form_submit($form, &$form_state) {
   }
   if (isset($form_state['values']['tfa_basic_sms_nanp_validate'])) {
     variable_set('tfa_basic_sms_nanp_validate', $form_state['values']['tfa_basic_sms_nanp_validate']);
+  }
+  if (!empty($form_state['values']['tfa_basic_email_subject_text'])) {
+    variable_set('tfa_basic_email_subject_text', $form_state['values']['tfa_basic_email_subject_text']);
+  }
+  if (!empty($form_state['values']['tfa_basic_email_message_text'])) {
+    variable_set('tfa_basic_email_message_text', $form_state['values']['tfa_basic_email_message_text']);
   }
   if (!empty($form_state['values']['tfa_basic_help_text'])) {
     variable_set('tfa_basic_help_text', $form_state['values']['tfa_basic_help_text']);
@@ -751,6 +814,10 @@ function tfa_basic_mail($key, &$message, $params) {
       $message['body']['body'] = tfa_basic_tfa_disabled_body($message, $params);
       break;
 
+    case 'tfa_basic_email_send_code':
+      $message['subject'] = tfa_basic_tfa_basic_email_send_code_subject($message, $params);
+      $message['body']['body'] = tfa_basic_tfa_basic_email_send_code_body($message, $params);
+      break;
   }
 }
 
@@ -800,4 +867,40 @@ If you did not take this action, please contact a site administrator immediately
 -- @site_name team", array('@site_name' => variable_get('site_name', 'Drupal')));
 
   return token_replace($text, array('user' => $params['account']), array('language' => $message['language'], 'sanitize' => FALSE, 'clear' => TRUE));
+}
+
+/**
+ * Returns text appropriate for an email subject when someone is authenticating.
+ *
+ * @param array $message
+ *   The message, must include the language.
+ * @param array $params
+ *   Parameters from drupal_mail.
+ *
+ * @return string
+ *   Message subject.
+ */
+function tfa_basic_tfa_basic_email_send_code_subject($message, $params) {
+  $options = array('langcode' => $message['language']->language);
+  $subject_tpl = variable_get('tfa_basic_email_subject_text', '@site_name verification code');
+  $text = t($subject_tpl, array('@site_name' => $params['site_name']), $options);
+  return $text;
+}
+
+/**
+ * Returns text appropriate for an email body when someone is authenticating.
+ *
+ * @param array $message
+ *   The message, must include the language.
+ * @param array $params
+ *   Parameters from drupal_mail.
+ *
+ * @return string
+ *   Message body.
+ */
+function tfa_basic_tfa_basic_email_send_code_body($message, $params) {
+  $options = array('langcode' => $message['language']->language);
+  $body_tpl = variable_get('tfa_basic_email_message_text', 'Verification code: @code');
+  $text = t($body_tpl, array('@code' => $params['authentication_code']), $options);
+  return $text;
 }
