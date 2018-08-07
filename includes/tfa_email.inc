@@ -6,16 +6,23 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   protected $userEmailAddress;
   protected $account;
   protected $code;
+  protected $expiration;
   protected $codeLength;
   protected $language;
 
   const TFA_EMAIL_CODE_LENGTH = 6;
   const TFA_EMAIL_CODE_CHARACTERS = '0123456789';
+  const TFA_EMAIL_CODE_EXPIRATION_SECONDS = 600;
 
   public function __construct(array $context, $account) {
     parent::__construct($context);
     if (!empty($context['validate_context']) && !empty($context['validate_context']['code'])) {
       $this->code = $context['validate_context']['code'];
+      if (isset($context['validate_context']['expiration'])
+          && !empty($context['validate_context']['expiration'])
+      ) {
+        $this->expiration = $context['validate_context']['expiration'];
+      }
     }
 
     $this->account = $account;
@@ -50,7 +57,9 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
    */
   public function begin() {
     if (!$this->code) {
-      $this->code = $this->generate();
+      $code = $this->generate();
+      $this->code = $code['code'];
+      $this->expiration = $code['expiration'];
       if (!$this->sendCode($this->code)) {
         $this->showErrorMessage();
       }
@@ -86,13 +95,18 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
     if ($form_state['values']['op'] === $form_state['values']['resend']) {
       return TRUE;
     }
-    elseif (!parent::validate($form_state['values']['code'])) {
+
+    if (!empty($this->expiration) && $this->expiration < time()) {
       $this->errorMessages['code'] = t('Invalid code.');
       return FALSE;
     }
-    else {
-      return TRUE;
+
+    if (!parent::validate($form_state['values']['code'])) {
+      $this->errorMessages['code'] = t('Invalid code.');
+      return FALSE;
     }
+
+    return TRUE;
   }
 
   public function showErrorMessage() {
@@ -117,7 +131,9 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   public function submitForm(array $form, array &$form_state) {
     // Resend code if pushed.
     if ($form_state['values']['op'] === $form_state['values']['resend']) {
-      $this->code = $this->generate();
+      $code = $this->generate();
+      $this->code = $code['code'];
+      $this->expiration = $code['expiration'];
       if (!$this->sendCode($this->code)) {
         $this->showErrorMessage();
       }
@@ -139,6 +155,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   public function getPluginContext() {
     return array(
       'code' => $this->code,
+      'expiration' => $this->expiration,
     );
   }
 
@@ -149,7 +166,11 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
     for ($p = 0; $p < $this->codeLength; $p++) {
       $string .= $characters[mt_rand(0, $max)];
     }
-    return $string;
+    $expiration = time() + self::TFA_EMAIL_CODE_EXPIRATION_SECONDS;
+    return array(
+      'code' => $string,
+      'expiration' => $expiration,
+    );
   }
 
   protected function getUserEmailAddress() {
@@ -194,7 +215,9 @@ class TfaBasicEmailSetup extends TfaBasicEmail implements TfaSetupPluginInterfac
 
   public function begin() {
     if (empty($this->code)) {
-      $this->code = $this->generate();
+      $code = $this->generate();
+      $this->code = $code['code'];
+      $this->expiration = $code['expiration'];
       if (!$this->sendCode($this->code)) {
         // @todo decide on error text
         $this->errorMessages[''] = t('Unable to deliver code to that email address.');
