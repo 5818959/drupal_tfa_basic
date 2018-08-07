@@ -9,6 +9,9 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   protected $codeLength;
   protected $language;
 
+  const TFA_EMAIL_CODE_LENGTH = 6;
+  const TFA_EMAIL_CODE_CHARACTERS = '0123456789';
+
   public function __construct(array $context, $account) {
     parent::__construct($context);
     if (!empty($context['validate_context']) && !empty($context['validate_context']['code'])) {
@@ -17,7 +20,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
 
     $this->account = $account;
     $this->siteEmailAddress = variable_get('site_mail', ini_get('sendmail_from'));
-    $this->codeLength = 6;
+    $this->codeLength = self::TFA_EMAIL_CODE_LENGTH;
     $this->language = user_preferred_language($account);
 
     $this->userEmailAddress = $this->getUserEmailAddress();
@@ -140,7 +143,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   }
 
   protected function generate() {
-    $characters = '0123456789';
+    $characters = self::TFA_EMAIL_CODE_CHARACTERS;
     $string = '';
     $max = strlen($characters) - 1;
     for ($p = 0; $p < $this->codeLength; $p++) {
