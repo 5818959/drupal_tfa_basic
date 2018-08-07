@@ -10,8 +10,8 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   protected $codeLength;
   protected $language;
 
-  const TFA_EMAIL_CODE_LENGTH = 6;
-  const TFA_EMAIL_CODE_CHARACTERS = '0123456789';
+  const TFA_EMAIL_CODE_LENGTH = 8;
+  const TFA_EMAIL_CODE_CHARACTERS = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
   const TFA_EMAIL_CODE_EXPIRATION_SECONDS = 600;
 
   public function __construct(array $context, $account) {
