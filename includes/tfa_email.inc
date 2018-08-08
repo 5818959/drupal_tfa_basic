@@ -13,6 +13,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   const TFA_EMAIL_CODE_LENGTH = 8;
   const TFA_EMAIL_CODE_CHARACTERS = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
   const TFA_EMAIL_CODE_EXPIRATION_SECONDS = 600;
+  const TFA_EMAIL_CODE_CASE_INSENSITIVE = TRUE;
 
   public function __construct(array $context, $account) {
     parent::__construct($context);
@@ -101,7 +102,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
       return FALSE;
     }
 
-    if (!parent::validate($form_state['values']['code'])) {
+    if (!$this->validate($form_state['values']['code'])) {
       $this->errorMessages['code'] = t('Invalid code.');
       return FALSE;
     }
@@ -201,6 +202,26 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
     );
     $message_result = drupal_mail('tfa_basic', $key, $to, $this->language, $params);
     return ($message_result['result'] == TRUE);
+  }
+
+  /**
+   * Validate code.
+   *
+   * @param string $code Code to be validated
+   * @return bool Whether code is valid
+   */
+  protected function validate($code) {
+    $cmpFunction = 'strcmp';
+    if (self::TFA_EMAIL_CODE_CASE_INSENSITIVE) {
+      $cmpFunction = 'strcasecmp';
+    }
+
+    if ($cmpFunction((string) $code, (string) $this->code) === 0) {
+      $this->isValid = TRUE;
+      return TRUE;
+    }
+
+    return FALSE;
   }
 }
 
