@@ -2,18 +2,21 @@
 
 class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterface, TfaSendPluginInterface {
 
+  const TFA_EMAIL_CODE_LENGTH = 6;
+  const TFA_EMAIL_CODE_CHARACTERS = '0123456789';
+  const TFA_EMAIL_CODE_EXPIRATION_SECONDS = 600;
+  const TFA_EMAIL_CODE_CASE_INSENSITIVE = FALSE;
+
   protected $siteEmailAddress;
   protected $userEmailAddress;
   protected $account;
   protected $code;
   protected $expiration;
   protected $codeLength;
+  protected $codeCharacters;
+  protected $codeExpiration;
+  protected $codeCaseInsensitive;
   protected $language;
-
-  const TFA_EMAIL_CODE_LENGTH = 8;
-  const TFA_EMAIL_CODE_CHARACTERS = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-  const TFA_EMAIL_CODE_EXPIRATION_SECONDS = 600;
-  const TFA_EMAIL_CODE_CASE_INSENSITIVE = TRUE;
 
   public function __construct(array $context, $account) {
     parent::__construct($context);
@@ -28,7 +31,10 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
 
     $this->account = $account;
     $this->siteEmailAddress = variable_get('site_mail', ini_get('sendmail_from'));
-    $this->codeLength = self::TFA_EMAIL_CODE_LENGTH;
+    $this->codeLength = variable_get('tfa_basic_email_code_length', self::TFA_EMAIL_CODE_LENGTH);
+    $this->codeCharacters = variable_get('tfa_basic_email_code_characters', self::TFA_EMAIL_CODE_CHARACTERS);
+    $this->codeExpiration = variable_get('tfa_basic_email_code_expiration', self::TFA_EMAIL_CODE_EXPIRATION_SECONDS);
+    $this->codeCaseInsensitive = variable_get('tfa_basic_email_code_case_insensitive', self::TFA_EMAIL_CODE_CASE_INSENSITIVE);
     $this->language = user_preferred_language($account);
 
     $this->userEmailAddress = $this->getUserEmailAddress();
@@ -58,9 +64,8 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
    */
   public function begin() {
     if (!$this->code) {
-      $code = $this->generate();
-      $this->code = $code['code'];
-      $this->expiration = $code['expiration'];
+      $this->code = $this->generate();
+      $this->expiration = $this->expiration();
       if (!$this->sendCode($this->code)) {
         $this->showErrorMessage();
       }
@@ -132,9 +137,8 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   public function submitForm(array $form, array &$form_state) {
     // Resend code if pushed.
     if ($form_state['values']['op'] === $form_state['values']['resend']) {
-      $code = $this->generate();
-      $this->code = $code['code'];
-      $this->expiration = $code['expiration'];
+      $this->code = $this->generate();
+      $this->expiration = $this->expiration();
       if (!$this->sendCode($this->code)) {
         $this->showErrorMessage();
       }
@@ -161,17 +165,16 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
   }
 
   protected function generate() {
-    $characters = self::TFA_EMAIL_CODE_CHARACTERS;
     $string = '';
-    $max = strlen($characters) - 1;
+    $max = strlen($this->codeCharacters) - 1;
     for ($p = 0; $p < $this->codeLength; $p++) {
-      $string .= $characters[mt_rand(0, $max)];
+      $string .= $this->codeCharacters[mt_rand(0, $max)];
     }
-    $expiration = time() + self::TFA_EMAIL_CODE_EXPIRATION_SECONDS;
-    return array(
-      'code' => $string,
-      'expiration' => $expiration,
-    );
+    return $string;
+  }
+
+  protected function expiration() {
+    return time() + $this->codeExpiration;
   }
 
   protected function getUserEmailAddress() {
@@ -236,9 +239,8 @@ class TfaBasicEmailSetup extends TfaBasicEmail implements TfaSetupPluginInterfac
 
   public function begin() {
     if (empty($this->code)) {
-      $code = $this->generate();
-      $this->code = $code['code'];
-      $this->expiration = $code['expiration'];
+      $this->code = $this->generate();
+      $this->expiration = $this->expiration();
       if (!$this->sendCode($this->code)) {
         // @todo decide on error text
         $this->errorMessages[''] = t('Unable to deliver code to that email address.');
