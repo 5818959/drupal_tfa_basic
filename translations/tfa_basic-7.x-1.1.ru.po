@@ -1,0 +1,771 @@
+# $Id$
+#
+# Russian translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  tfa_basic.pages.inc: n/a
+#  tfa_basic.module: n/a
+#  includes/tfa_recovery.inc: n/a
+#  includes/tfa_sms.inc: n/a
+#  includes/tfa_trusted_browser.inc: n/a
+#  includes/tfa_help.inc: n/a
+#  tfa_basic.info: n/a
+#  includes/tfa_email.inc: n/a
+#  includes/tfa_totp.inc: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2018-08-02 14:04+0300\n"
+"PO-Revision-Date: 2018-08-07 16:24+0300\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Russian <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+"Language: ru\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#: tfa_basic.pages.inc:10
+msgid "Two-factor authentication (TFA) provides additional security for your account. With TFA enabled, you log in to the site with a verification code in addition to your username and password."
+msgstr "Двухфакторная аутентификация (TFA) обеспечивает дополнительную безопасность для Вашей учетной записи. При включенной TFA Вы входите на сайт с кодом подтверждения в дополнение к своим логину и паролю."
+
+#: tfa_basic.pages.inc:18
+msgid "Status: <strong>TFA enabled</strong>, set !time. <a href=\"!url\">Disable TFA</a>"
+msgstr "Статус: <strong>TFA включена</strong> !time. <a href=\"!url\">Отключить TFA</a>"
+
+#: tfa_basic.pages.inc:21
+msgid "Status: <strong>TFA disabled</strong>, set !time."
+msgstr "Статус: <strong>TFA выключена</strong> !time."
+
+#: tfa_basic.pages.inc:75
+msgid "TFA application"
+msgstr "TFA приложение"
+
+#: tfa_basic.pages.inc:80
+msgid "Generate verification codes from a mobile or desktop application."
+msgstr "Создание кодов подтверждения с мобильного или настольного приложения."
+
+#: tfa_basic.pages.inc:86
+msgid "Set up application"
+msgstr "Настройка приложения"
+
+#: tfa_basic.pages.inc:86
+msgid "Reset application"
+msgstr "Сброс приложения"
+
+#: tfa_basic.pages.inc:98
+msgid "SMS"
+msgstr "SMS"
+
+#: tfa_basic.pages.inc:103
+msgid "Receive verification code via SMS."
+msgstr "Получите код подтверждения с помощью SMS."
+
+#: tfa_basic.pages.inc:111
+msgid "Deliver to @number"
+msgstr "Доставить на @number"
+
+#: tfa_basic.pages.inc:115
+msgid "Set up SMS delivery"
+msgstr "Настройка доставки SMS"
+
+#: tfa_basic.pages.inc:118
+msgid "Reset SMS delivery"
+msgstr "Сброс доставки SMS"
+
+#: tfa_basic.pages.inc:128
+msgid "Not available for use"
+msgstr "Недоступно для использования"
+
+#: tfa_basic.pages.inc:138
+msgid "Email"
+msgstr "Email"
+
+#: tfa_basic.pages.inc:143
+msgid "Receive verification code via your account's email address (@email_address)."
+msgstr "Получить код подтверждения через адрес электронной почты своей учетной записи (@email_address)."
+
+#: tfa_basic.pages.inc:149
+msgid "Set up email delivery"
+msgstr "Настройка доставки по электронной почте"
+
+#: tfa_basic.pages.inc:149
+msgid "Reset email delivery"
+msgstr "Сброс доставки по электронной почте"
+
+#: tfa_basic.pages.inc:166
+msgid "@browser, expires !expiration"
+msgstr "@browser, истекает !expiration"
+
+#: tfa_basic.pages.inc:169
+msgid "@browser, expires !expiration, last used !time"
+msgstr "@browser, истекает !expiration, последнее использование !time"
+
+#: tfa_basic.pages.inc:177
+msgid "Trusted browsers"
+msgstr "Доверенные браузеры"
+
+#: tfa_basic.pages.inc:182
+msgid "Browsers that will not require a verification code during login."
+msgstr "Браузеры, которые не будут запрашивать код подтверждения во время входа."
+
+#: tfa_basic.pages.inc:195
+msgid "Set trusted browsers"
+msgstr "Настройка доверенных браузеров"
+
+#: tfa_basic.pages.inc:207
+msgid "Recovery codes"
+msgstr "Коды восстановления"
+
+#: tfa_basic.pages.inc:212
+msgid "Pre-generated, one-time-use codes intended as a fallback should other methods be unavailable."
+msgstr "Предварительно генерируемые одноразовые коды, предназначенные для резервного копирования, должны быть недоступны другими методами."
+
+#: tfa_basic.pages.inc:217
+msgid "Get recovery codes"
+msgstr "Получить коды восстановления"
+
+#: tfa_basic.pages.inc:224
+msgid "View unused recovery codes"
+msgstr "Посмотреть неиспользуемые коды восстановления"
+
+#: tfa_basic.pages.inc:228
+msgid "Get new recovery codes"
+msgstr "Получить новые коды восстановления"
+
+#: tfa_basic.pages.inc:250
+msgid "Are you sure you want to disable TFA on account %name?"
+msgstr "Вы действительно хотите отключить TFA для учетной записи %name?"
+
+#: tfa_basic.pages.inc:251
+msgid "TFA settings and data will be lost. %name can re-enable TFA again from their profile."
+msgstr "Настройки и данные TFA будут потеряны. %name сможет снова включить TFA из своего профиля."
+
+#: tfa_basic.pages.inc:253
+msgid "This account is required to have TFA enabled per the 'require TFA' permission on one of their roles. Disabling TFA will remove their ability to log back into the site. If you continue, consider also removing the role so they can authenticate and setup TFA again."
+msgstr "Эта учётная запись требует включенной TFA разрешением 'требуется TFA' в одной из своих ролей. Отключение TFA удалит возможность входа на сайт. Если Вы продолжите, рассмотрите также удаление роли, чтобы пользователи могли аутентифицировать и настроить TFA еще раз."
+
+#: tfa_basic.pages.inc:257
+msgid "Are you sure you want to disable your two-factor authentication setup?"
+msgstr "Вы действительно хотите отключить двухфакторную аутентификацию?"
+
+#: tfa_basic.pages.inc:258
+msgid "Your settings and data will be lost. You can re-enable two-factor authentication again from your profile."
+msgstr "Ваши настройки и данные будут потеряны. Вы можете снова включить двухфакторную аутентификацию из своего профиля."
+
+#: tfa_basic.pages.inc:260
+msgid "Your account must have at least one two-factor authentication method enabled. Continuing will disable your ability to log back into this site."
+msgstr "У Вашей учетной записи должен быть включен хотя бы один метод двухфакторный аутентификации. Продолжив Вы потеряете возможность входить на этот сайт."
+
+#: tfa_basic.pages.inc:261
+msgid "Your settings and data will be lost and you will be unable to log back into the site. To regain access contact a site administrator."
+msgstr "Ваши настройки и данные будут потеряны, и Вы не сможете вернуться на сайт. Чтобы восстановить доступ, обратитесь к администратору сайта."
+
+#: tfa_basic.pages.inc:277
+msgid "Confirm your current password"
+msgstr "Подтвердите свой текущий пароль"
+
+#: tfa_basic.pages.inc:290
+msgid "Disable"
+msgstr "Отключить"
+
+#: tfa_basic.pages.inc:294;390;533
+msgid "Cancel"
+msgstr "Отмена"
+
+#: tfa_basic.pages.inc:316;561
+msgid "Incorrect password."
+msgstr "Неверный пароль."
+
+#: tfa_basic.pages.inc:326
+msgid "TFA disable canceled."
+msgstr "Отключение TFA отменено."
+
+#: tfa_basic.pages.inc:350
+msgid "TFA has been disabled."
+msgstr "TFA отключен."
+
+#: tfa_basic.pages.inc:371
+msgid "Enter your current password to alter TFA settings for account %name."
+msgstr "Введите текущий пароль, чтобы изменить настройки TFA для учетной записи %name."
+
+#: tfa_basic.pages.inc:374
+msgid "Enter your current password to continue."
+msgstr "Введите текущий пароль, чтобы продолжить."
+
+#: tfa_basic.pages.inc:378
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: tfa_basic.pages.inc:386
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: tfa_basic.pages.inc:414
+msgid "TFA setup - Application"
+msgstr "Настройка TFA - Приложение"
+
+#: tfa_basic.pages.inc:421
+msgid "Note: You should delete the old account in your mobile or desktop app before adding this new one."
+msgstr "Примечание. Перед добавлением новой учетной записи Вы должны удалить старую учетную запись в своем мобильном или настольном приложении."
+
+#: tfa_basic.pages.inc:429
+msgid "TFA setup - Trusted browsers"
+msgstr "Настройка TFA - Доверенные браузеры"
+
+#: tfa_basic.pages.inc:437
+msgid "TFA setup - Recovery codes"
+msgstr "Настройка TFA - Коды восстановления"
+
+#: tfa_basic.pages.inc:445
+msgid "TFA setup - SMS"
+msgstr "Настройка TFA - SMS"
+
+#: tfa_basic.pages.inc:451
+msgid "Mobile phone number"
+msgstr "Номер мобильного телефона"
+
+#: tfa_basic.pages.inc:453
+msgid "Enter your mobile phone number that can receive SMS codes. A code will be sent to this number for validation."
+msgstr "Введите номер своего мобильного телефона, который может получать коды SMS. Код будет отправлен на этот номер для проверки."
+
+#: tfa_basic.pages.inc:460
+msgid "This number is stored on your account under field %label."
+msgstr "Этот номер хранится в вашей учетной записи в поле %label."
+
+#: tfa_basic.pages.inc:464
+msgid "Send SMS"
+msgstr "Отправить SMS"
+
+#: tfa_basic.pages.inc:470
+msgid "Disable SMS delivery"
+msgstr "Отключить доставку SMS"
+
+#: tfa_basic.pages.inc:479
+msgid "A code was sent to @number. It may take up to a minute for its arrival."
+msgstr "Код был отправлен на @number. Доставка может занять до минуты."
+
+#: tfa_basic.pages.inc:483
+msgid "If the code does not arrive or you entered the wrong number skip this step to continue without SMS delivery. You can enable it after completing the rest of TFA setup."
+msgstr "Если код не пришел или Вы ввели неправильный номер, пропустите этот шаг, чтобы продолжить без доставки SMS. Вы можете включить его после завершения остальной настройки TFA."
+
+#: tfa_basic.pages.inc:486
+msgid "If the code does not arrive or you entered the wrong number click here to start over."
+msgstr "Если код не пришел или Вы ввели неправильный номер, нажмите здесь, чтобы начать заново."
+
+#: tfa_basic.pages.inc:494
+msgid "TFA setup - Email"
+msgstr "Настройка TFA - Email"
+
+#: tfa_basic.pages.inc:508;788
+msgid "Return to account TFA overview"
+msgstr "Вернуться к профилю TFA"
+
+#: tfa_basic.pages.inc:524
+msgid "Skip"
+msgstr "Пропустить"
+
+#: tfa_basic.pages.inc:524
+msgid "Skip and finish"
+msgstr "Пропустить и закончить"
+
+#: tfa_basic.pages.inc:600
+msgid "TFA setup canceled."
+msgstr "Настройка TFA отменена."
+
+#: tfa_basic.pages.inc:635
+msgid "TFA SMS delivery disabled."
+msgstr "Доставка SMS-сообщений TFA отключена."
+
+#: tfa_basic.pages.inc:664
+msgid "There was an error during TFA setup. Your settings have not been saved."
+msgstr "При настройке TFA произошла ошибка. Ваши настройки не сохранены."
+
+#: tfa_basic.pages.inc:687
+msgid "TFA setup complete."
+msgstr "Настройка TFA завершена."
+
+#: tfa_basic.pages.inc:739
+msgid "Application codes not enabled."
+msgstr "Коды приложений не включены."
+
+#: tfa_basic.pages.inc:739
+msgid "Application code verified."
+msgstr "Код приложения подтвержден."
+
+#: tfa_basic.pages.inc:743
+msgid "SMS code delivery not enabled."
+msgstr "Доставка кода по SMS не включена."
+
+#: tfa_basic.pages.inc:743
+msgid "SMS code verified."
+msgstr "Код СМС подтвержден."
+
+#: tfa_basic.pages.inc:747
+msgid "Email code delivery not enabled."
+msgstr "Доставка кода по электронной почте не включена."
+
+#: tfa_basic.pages.inc:747
+msgid "Email code verified."
+msgstr "Код электронной почты подтвержден."
+
+#: tfa_basic.pages.inc:753
+msgid "Browser not saved."
+msgstr "Браузер не сохранен."
+
+#: tfa_basic.pages.inc:756
+msgid "Browser saved."
+msgstr "Браузер сохранен."
+
+#: tfa_basic.pages.inc:761
+msgid "Recovery codes not saved."
+msgstr "Коды восстановления не сохранены."
+
+#: tfa_basic.pages.inc:761
+msgid "Saved recovery codes."
+msgstr "Сохраненные коды восстановления."
+
+#: tfa_basic.pages.inc:342;637;698 tfa_basic.module:156 includes/tfa_recovery.inc:72 includes/tfa_sms.inc:147;155 includes/tfa_trusted_browser.inc:118;308
+msgid "tfa_basic"
+msgstr "tfa_basic"
+
+#: tfa_basic.pages.inc:342
+msgid "TFA disabled for user @name UID !uid"
+msgstr "TFA отключен для пользователя @name UID !uid"
+
+#: tfa_basic.pages.inc:637
+msgid "TFA SMS disabled for user @name UID !uid"
+msgstr "TFA по SMS отключен для пользователя @name UID !uid"
+
+#: tfa_basic.pages.inc:698
+msgid "TFA enabled for user @name UID !uid"
+msgstr "TFA включен для пользователя @name UID !uid"
+
+#: tfa_basic.pages.inc:765
+msgid "One setup step remaining."
+msgid_plural "@count TFA setup steps remain."
+msgstr[0] "Остался один шаг настройки."
+msgstr[1] "Осталось @count шага настройки."
+msgstr[2] "Осталось @count шагов настройки."
+
+#: tfa_basic.module:9
+msgid "Set up TFA for account"
+msgstr "Настройка TFA для учетной записи"
+
+#: tfa_basic.module:10
+msgid "Allow users to set up TFA for their account. Users with \"administer users\" permission can edit other account's TFA."
+msgstr "Разрешить пользователям настраивать TFA для своей учетной записи. Пользователи с правами «администрировать пользователей» могут редактировать TFA другого аккаунта."
+
+#: tfa_basic.module:304
+msgid "Login disallowed. You are required to set up two-factor authentication. Please contact a site administrator."
+msgstr "Вход запрещен. Вам необходимо настроить двухфакторную аутентификацию. Обратитесь к администратору сайта."
+
+#: tfa_basic.module:397
+msgid "If you are having trouble click \"Can't access your account?\" for further authentication options."
+msgstr "Если у Вас возникли проблемы, нажмите «Не удается получить доступ к своей учетной записи?» для дополнительных способов входа."
+
+#: tfa_basic.module:508
+msgid "Number does not match expected patterns."
+msgstr "Число не соответствует ожидаемым шаблонам."
+
+#: tfa_basic.module:515
+msgid "The phone number must only contain digits, space, hyphen or plus."
+msgstr "Номер телефона должен содержать только цифры, пробел, дефис или плюс."
+
+#: tfa_basic.module:564
+msgid "Roles required to have set up TFA"
+msgstr "Роли, необходимые для настройки TFA"
+
+#: tfa_basic.module:565
+msgid "Login will be denied to an account without TFA setup and any matching role."
+msgstr "Вход будет отклонен для учетной записи без настройки TFA и любой соответствующей роли."
+
+#: tfa_basic.module:573
+msgid "Cookie domain"
+msgstr "Cookie домен"
+
+#: tfa_basic.module:575
+msgid "Domain to set for the trusted browser TFA cookie."
+msgstr "Домен для настройки TFA cookie доверенного браузера."
+
+#: tfa_basic.module:601
+msgid "Twilio account SID"
+msgstr "SID аккаунта Twilio"
+
+#: tfa_basic.module:603
+msgid "Twilio account SID from twilio.com."
+msgstr "SID аккаунта Twilio с twilio.com."
+
+#: tfa_basic.module:608
+msgid "Twilio account token"
+msgstr "Токен аккаунта Twilio"
+
+#: tfa_basic.module:610
+msgid "Private Twilio account token from twilio.com."
+msgstr "Приватный токен аккаунта Twilio с twilio.com."
+
+#: tfa_basic.module:615
+msgid "Twilio account number"
+msgstr "Номер аккаунта Twilio"
+
+#: tfa_basic.module:617
+msgid "Private Twilio account number from twilio.com."
+msgstr "Приватный номер аккаунта Twilio с twilio.com."
+
+#: tfa_basic.module:622
+msgid "Twilio message text"
+msgstr "Текст сообщения Twilio"
+
+#: tfa_basic.module:625
+msgid "Text to be sent to the user. Use !code for the verification code."
+msgstr "Текст для отправки пользователю. Используйте !code для кода подтверждения."
+
+#: tfa_basic.module:630
+msgid "Validate phone numbers against NANP"
+msgstr "Проверять номер телефона на соответствие NANP"
+
+#: tfa_basic.module:632
+msgid "If enabled phone numbers will be checked against the North American Numbering Plan."
+msgstr "Если включено, номера телефонов будут проверены в соответствии с Североамериканским планом нумерации."
+
+#: tfa_basic.module:640
+msgid "SMS mobile number"
+msgstr "SMS мобильный номер"
+
+#: tfa_basic.module:642
+msgid "<div class=\"error messages\">An account field for mobile number storage is required to use the Twilio SMS plugin. Consult TFA Basic README.txt for more info.</div>"
+msgstr "<div class=\"error messages\">Для использования плагина Twilio SMS требуется поле учетной записи для хранения мобильных номеров. Для получения дополнительной информации обратитесь к TFA Basic README.txt.</div>"
+
+#: tfa_basic.module:657
+msgid "Account field that stores mobile numbers."
+msgstr "Поле учетной записи, в котором хранятся номера мобильных телефонов."
+
+#: tfa_basic.module:664
+msgid "Not available for use because Twilio PHP library is not installed. See TFA Basic README.txt."
+msgstr "Недоступно для использования, потому что библиотека Twilio PHP не установлена. См. TFA Basic README.txt."
+
+#: tfa_basic.module:678
+msgid "Email subject text"
+msgstr "Текст темы письма электронной почты"
+
+#: tfa_basic.module:680
+msgid "The email subject sent to user."
+msgstr "Тема письма электронной почты, отправляемого пользователю."
+
+#: tfa_basic.module:686
+msgid "Email message text"
+msgstr "Текст сообщения электронной почты"
+
+#: tfa_basic.module:688
+msgid "The email message sent to user."
+msgstr "Сообщение письма электронной почты, отправляемое пользователю."
+
+#: tfa_basic.module:695 includes/tfa_help.inc:16
+msgid "Contact support to reset your access"
+msgstr "Обратитесь в службу поддержки, чтобы сбросить доступ"
+
+#: tfa_basic.module:698
+msgid "Help page text"
+msgstr "Текст страницы справки"
+
+#: tfa_basic.module:700
+msgid "Text to display on help page. Plain text only."
+msgstr "Текст для отображения на странице справки. Только обычный текст."
+
+#: tfa_basic.module:730
+msgid "Cookie domain is required if Trusted Browser plugin is enabled."
+msgstr "Домен cookie требуется, если включен плагин Доверенные браузеры."
+
+#: tfa_basic.module:735
+msgid "Account SID is required if Twilio SMS plugin is enabled."
+msgstr "SID учетной записи требуется, если включен плагин Twilio SMS."
+
+#: tfa_basic.module:738
+msgid "Account token is required if Twilio SMS plugin is enabled."
+msgstr "Токен аккаунта требуется, если включен плагин Twilio SMS."
+
+#: tfa_basic.module:741
+msgid "Account number is required if Twilio SMS plugin is enabled."
+msgstr "Номер аккаунта требуется, если включен плагин Twilio SMS."
+
+#: tfa_basic.module:744
+msgid "Message text is required if Twilio SMS plugin is enabled."
+msgstr "Текст сообщения требуется, если включен плагин Twilio SMS."
+
+#: tfa_basic.module:747
+msgid "Message text must include token !code."
+msgstr "Текст сообщения должен содержать код !code."
+
+#: tfa_basic.module:751
+msgid "An account field for mobile number storage is required to use the Twilio SMS plugin. Consult TFA Basic README.txt for more info."
+msgstr "Для использования плагина Twilio SMS требуется поле учетной записи для хранения мобильных номеров. Для получения дополнительной информации обратитесь к TFA Basic README.txt."
+
+#: tfa_basic.module:756
+msgid "Email subject required if Email plugin is enabled."
+msgstr "Тема электронной почты требуется, если включен плагин электронной почты."
+
+#: tfa_basic.module:759
+msgid "Email message required if Email plugin is enabled."
+msgstr "Сообщение электронной почты требуется, если включен плагин электронной почты."
+
+#: tfa_basic.module:808
+msgid "Your @site_name account now has two-factor authentication"
+msgstr "Для Вашей учетной записи @site_name активирована двухфакторная аутентификация"
+
+#: tfa_basic.module:813
+msgid "Your @site_name account no longer has two-factor authentication"
+msgstr "У Вашей учетной записи @site_name больше нет двухфакторной аутентификации"
+
+#: tfa_basic.module:836
+msgid ""
+"[user:name],\n"
+"\n"
+"Thanks for configuring two-factor authentication on your @site_name account!\n"
+"\n"
+"This additional level of security will help to ensure that only you are able to log in to your account.\n"
+"\n"
+"If you ever lose the device you configured, you should act quickly to delete its association with this account.\n"
+"\n"
+"-- @site_name team"
+msgstr ""
+"[user:name],\n"
+"\n"
+"Благодарим за настройку двухфакторной аутентификации в Вашей учетной записи @site_name!\n"
+"\n"
+"Этот дополнительный уровень безопасности поможет гарантировать, что только Вы сможете войти в свою учетную запись.\n"
+"\n"
+"-- @site_name"
+
+#: tfa_basic.module:861
+msgid ""
+"[user:name],\n"
+"\n"
+"Two-factor authentication has been disabled on your account.\n"
+"\n"
+"If you did not take this action, please contact a site administrator immediately.\n"
+"\n"
+"-- @site_name team"
+msgstr ""
+"[user:name],\n"
+"\n"
+"В Вашем аккаунте отключена двухфакторная аутентификация.\n"
+"\n"
+"Если не Вы производили это действие, немедленно свяжитесь с администратором сайта.\n"
+"\n"
+"-- @site_name"
+
+#: tfa_basic.module:156
+msgid "Removed !num TFA trusted browsers older than !time"
+msgstr "Удалены !num TFA доверенных браузера старше !time"
+
+#: tfa_basic.module:57
+msgid "Security"
+msgstr "Безопасность"
+
+#: tfa_basic.module:66
+msgid "TFA disable"
+msgstr "Отключить TFA"
+
+#: tfa_basic.module:75;84;93;111;120
+msgid "TFA setup"
+msgstr "Настройка TFA - SMS"
+
+#: tfa_basic.module:102
+msgid "TFA - Unused recovery codes"
+msgstr "TFA - Неиспользованные коды восстановления"
+
+#: tfa_basic.info:0
+msgid "TFA Basic Plugins"
+msgstr "TFA Базовые плагины"
+
+#: tfa_basic.info:0
+msgid "TFA plugins for Time-based One Time Passwords, Trusted Browsers, Recovery Codes, and Twilio SMS"
+msgstr "Плагины TFA для одноразовых паролей, доверенных браузеров, кодов восстановления и Twilio SMS"
+
+#: includes/tfa_email.inc:60;208 includes/tfa_sms.inc:44;191
+msgid "Verification Code"
+msgstr "Код подтверждения"
+
+#: includes/tfa_email.inc:62
+msgid "Enter @length-character code sent to your email account (@email)."
+msgstr "Введите @length-значный код, отправленный на Ваш адрес электронной почты (@email)."
+
+#: includes/tfa_email.inc:69 includes/tfa_recovery.inc:48 includes/tfa_sms.inc:55 includes/tfa_totp.inc:64
+msgid "Verify"
+msgstr "Проверить"
+
+#: includes/tfa_email.inc:73 includes/tfa_sms.inc:59
+msgid "Resend"
+msgstr "Отправить повторно"
+
+#: includes/tfa_email.inc:87 includes/tfa_sms.inc:73
+msgid "Invalid code."
+msgstr "Неверный код."
+
+#: includes/tfa_email.inc:96
+msgid "An error occured while attempting to email your authentication code.  If you continue to experience difficulties, please contact us."
+msgstr "Произошла ошибка при попытке отправить код по электронной почте. Если Вы продолжаете испытывать трудности, свяжитесь с нами."
+
+#: includes/tfa_email.inc:101
+msgid "Unable to send e-mail. Contact the site administrator if the problem persists."
+msgstr "Невозможно отправить e-mail. Свяжитесь с администратором сайта, если проблема повторяется."
+
+#: includes/tfa_email.inc:122 includes/tfa_sms.inc:89
+msgid "Code resent"
+msgstr "Код отправлен повторно"
+
+#: includes/tfa_email.inc:197
+msgid "Unable to deliver code to that email address."
+msgstr "Не удалось доставить код на этот адрес электронной почты."
+
+#: includes/tfa_email.inc:210
+msgid "Enter @length-character code sent to your email account (@email_address)."
+msgstr "Введите @length-значный код, отправленный на Ваш адрес электронной почты (@email_address)."
+
+#: includes/tfa_email.inc:214 includes/tfa_sms.inc:200 includes/tfa_totp.inc:242
+msgid "Verify and save"
+msgstr "Проверить и сохранить"
+
+#: includes/tfa_email.inc:225 includes/tfa_sms.inc:211
+msgid "Invalid code. Please try again."
+msgstr "Неверный код. Пожалуйста, попробуйте еще раз."
+
+#: includes/tfa_recovery.inc:37
+msgid "Enter one of your recovery codes"
+msgstr "Введите один из кодов восстановления"
+
+#: includes/tfa_recovery.inc:39
+msgid "Recovery codes were generated when you first set up TFA. Format: XXX XX XXX"
+msgstr "Коды восстановления были созданы при первой настройке TFA. Формат: XXX XX XXX"
+
+#: includes/tfa_recovery.inc:111
+msgid "You have no unused codes available."
+msgstr "У вас нет неиспользованных кодов."
+
+#: includes/tfa_recovery.inc:124
+msgid "Invalid recovery code."
+msgstr "Неверный код восстановления."
+
+#: includes/tfa_recovery.inc:159
+msgid "Your recovery codes"
+msgstr "Ваши коды восстановления"
+
+#: includes/tfa_recovery.inc:160
+msgid "Print, save, or write down these codes for use in case you are without your application and need to log in."
+msgstr "Распечатайте, сохраните или запишите эти коды для использования в случае, если Вы не используете приложение, и Вам необходимо войти в систему."
+
+#: includes/tfa_recovery.inc:166 includes/tfa_trusted_browser.inc:281
+msgid "Save"
+msgstr "Сохранить"
+
+#: includes/tfa_recovery.inc:72
+msgid "Used TFA recovery code !id by user !uid"
+msgstr "Используйте TFA код восстановления !id пользователя !uid"
+
+#: includes/tfa_sms.inc:36;86
+msgid "Unable to deliver the code. Please contact support."
+msgstr "Не удалось доставить код. Обратитесь в службу поддержки."
+
+#: includes/tfa_sms.inc:46;193
+msgid "Enter @length-character code sent to your device."
+msgstr "Введите @length-символьный код, отправленный на ваше устройство."
+
+#: includes/tfa_sms.inc:180
+msgid "Unable to deliver code to that number."
+msgstr "Не удалось доставить код на этот номер."
+
+#: includes/tfa_sms.inc:147
+msgid "Message !id sent to user !uid on @sent"
+msgstr "Сообщение !id отправлено пользователю !uid на @sent"
+
+#: includes/tfa_sms.inc:155
+msgid "Twilio send message error to user !uid. Status code: @code, message: @message, link: @link"
+msgstr "Twilio отправил сообщение об ошибке пользователя !uid. Код статуса: @code, сообщение: @message, ссылка: @link"
+
+#: includes/tfa_totp.inc:53
+msgid "Application verification code"
+msgstr "Код подтверждения приложения"
+
+#: includes/tfa_totp.inc:54
+msgid "Verification code is application generated and !length digits long."
+msgstr "!length-символьный код проверки сгенерирован приложением."
+
+#: includes/tfa_totp.inc:75;253
+msgid "Invalid application code. Please try again."
+msgstr "Недопустимый код приложения. Пожалуйста, попробуйте еще раз."
+
+#: includes/tfa_totp.inc:77
+msgid "Invalid code, it was recently used for a login. Please wait for the application to generate a new code."
+msgstr "Недействительный код, он был недавно использован для входа. Подождите, пока приложение создаст новый код."
+
+#: includes/tfa_totp.inc:208
+msgid "Install authentication code application on your mobile or desktop device:"
+msgstr "Установите приложение для проверки подлинности на мобильном или настольном устройстве:"
+
+#: includes/tfa_totp.inc:212
+msgid "<p>The two-factor authentication application will be used during this setup and for generating codes during regular authentication. If the application supports it, scan the QR code below to get the setup code otherwise you can manually enter the text code.</p>"
+msgstr "<p>Приложение для двухфакторной аутентификации будет использоваться во время этой установки и для генерации кодов во время обычной проверки подлинности. Если приложение поддерживает это, сканируйте QR-код ниже, чтобы получить код установки, иначе Вы можете вручную ввести текстовый код.</p>"
+
+#: includes/tfa_totp.inc:219
+msgid "Enter this code into your two-factor authentication app or scan the QR code below."
+msgstr "Введите этот код в свое приложение двухфакторной аутентификации для проверки подлинности или сканируйте QR-код ниже."
+
+#: includes/tfa_totp.inc:244
+msgid "A verification code will be generated after you scan the above QR code or manually enter the setup code. The verification code is six digits long."
+msgstr "Код подтверждения будет сгенерирован после сканирования вышеуказанного QR-кода или вручную введите установочный код. Код подтверждения составляет шесть цифр."
+
+#: includes/tfa_trusted_browser.inc:57
+msgid "Remember this browser for @interval?"
+msgstr "Запомнить этот браузер на @interval?"
+
+#: includes/tfa_trusted_browser.inc:60
+msgid "Not recommended if you are on a public or shared computer."
+msgstr "Не рекомендуется, если Вы используете общедоступный компьютер."
+
+#: includes/tfa_trusted_browser.inc:219
+msgid "Trusted browsers are a method for simplifying login by avoiding verification code entry for a set amount of time, !time days from marking a browser as trusted. After !time days, to log in you'll need to enter a verification code with your username and password during which you can again mark the browser as trusted."
+msgstr ""
+"Доверенные браузеры - это метод упрощения входа в систему, избегая ввода кода подтверждения в течение установленного количества времени, !time дней с момента определения браузера как надежного. Через !time дней, чтобы войти в систему, Вам нужно ввести код подтверждения с Вашим именем пользователя и паролем, в течение которого Вы можете "
+"снова пометить браузер как надежный."
+
+#: includes/tfa_trusted_browser.inc:229
+msgid "Trust this browser?"
+msgstr "Доверять этому браузеру?"
+
+#: includes/tfa_trusted_browser.inc:235
+msgid "Name this browser"
+msgstr "Назовите этот браузер"
+
+#: includes/tfa_trusted_browser.inc:237
+msgid "Optionally, name the browser on your browser (e.g. \"home firefox\" or \"office desktop windows\"). Your current browser user agent is %browser"
+msgstr "При желании укажите название для браузер (например, «домашний firefox» или «office desktop windows»). Текущее имя Вашего браузера - %browser"
+
+#: includes/tfa_trusted_browser.inc:250
+msgid "Existing browsers"
+msgstr "Существующие браузеры"
+
+#: includes/tfa_trusted_browser.inc:251
+msgid "Leave checked to keep these browsers in your trusted log in list."
+msgstr "Оставьте отмеченным, чтобы сохранить эти браузеры в списке надежного входа в систему."
+
+#: includes/tfa_trusted_browser.inc:260
+msgid "@name (current browser)"
+msgstr "@name (текущий браузер)"
+
+#: includes/tfa_trusted_browser.inc:266
+msgid "Expires !expiration"
+msgstr "Истекает !expiration"
+
+#: includes/tfa_trusted_browser.inc:269
+msgid "Expires !expiration, last used for log in !time"
+msgstr "Истекает !expiration, последний раз использовался для входа !time"
+
+#: includes/tfa_trusted_browser.inc:118
+msgid "Set trusted browser for user UID !uid, browser @name"
+msgstr "Установить доверенный браузер для пользователя UID !uid, браузер @name"
+
+#: includes/tfa_trusted_browser.inc:308
+msgid "Removed !num TFA trusted browsers during trusted browser setup"
+msgstr "Удалено !num TFA доверенных браузера в процессе настройки доверенных браузеров"
