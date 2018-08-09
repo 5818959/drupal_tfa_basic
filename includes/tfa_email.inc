@@ -50,7 +50,9 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
       return FALSE;
     }
     $tfa_data = tfa_basic_get_tfa_data($this->account);
-    if (!is_array($tfa_data['data']['plugins'])) {
+    if (!isset($tfa_data['data']['plugins'])
+        || !is_array($tfa_data['data']['plugins'])
+    ) {
       return FALSE;
     }
     if (in_array('tfa_basic_email', $tfa_data['data']['plugins'])) {
