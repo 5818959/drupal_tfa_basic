@@ -217,7 +217,7 @@ class TfaBasicEmail extends TfaBasePlugin implements TfaValidationPluginInterfac
    */
   protected function validate($code) {
     $cmpFunction = 'strcmp';
-    if (self::TFA_EMAIL_CODE_CASE_INSENSITIVE) {
+    if ($this->codeCaseInsensitive) {
       $cmpFunction = 'strcasecmp';
     }
 
